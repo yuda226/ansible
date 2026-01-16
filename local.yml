@@ -28,17 +28,17 @@
 
   - name: Setup my environment
     hosts: localhost
-    become: yes  # <--- This is the key
-    tasks:
+    become: yes
+    tasks:  # <--- tasks is a peer to hosts
       - name: Remove conflicting fd-find
-        apt:
+        ansible.builtin.apt:
           name: fd-find
           state: absent
   
-  - name: Install the fd package
-    ansible.builtin.apt:
-      name: fd
-      state: present
+      - name: Install other tools
+        ansible.builtin.apt:
+          name: nvim
+          state: present
 
   tasks:
     - include_tasks: setup-Debian.yml
