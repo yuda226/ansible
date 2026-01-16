@@ -26,14 +26,16 @@
       state: present
     when: ansible_os_family == "Archlinux"
 
-  - name: Setup my environment
-    hosts: localhost
+  - name: ROS 2 Development Setup
+    hosts: all
+    connection: local
     become: yes
-    tasks:  # <--- tasks is a peer to hosts
-  - name: Remove conflicting fd-find
-    ansible.builtin.apt:
-      name: fd-find
-      state: absent
+    tasks:
+      - name: Remove conflicting fd-find
+        apt:
+          name: fd-find
+          state: absent
+        ignore_errors: yes
 
   - name: Install other tools
     ansible.builtin.apt:
