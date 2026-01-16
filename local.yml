@@ -30,15 +30,15 @@
     hosts: localhost
     become: yes
     tasks:  # <--- tasks is a peer to hosts
-      - name: Remove conflicting fd-find
-        ansible.builtin.apt:
-          name: fd-find
-          state: absent
-  
-      - name: Install other tools
-        ansible.builtin.apt:
-          name: nvim
-          state: present
+  - name: Remove conflicting fd-find
+    ansible.builtin.apt:
+      name: fd-find
+      state: absent
+
+  - name: Install other tools
+    ansible.builtin.apt:
+      name: nvim
+      state: present
 
   tasks:
     - include_tasks: setup-Debian.yml
