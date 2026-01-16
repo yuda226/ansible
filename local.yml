@@ -26,6 +26,16 @@
       state: present
     when: ansible_os_family == "Archlinux"
 
+  - name: Remove conflicting fd-find
+    ansible.builtin.apt:
+      name: fd-find
+      state: absent
+  
+  - name: Install the fd package
+    ansible.builtin.apt:
+      name: fd
+      state: present
+
   tasks:
     - include_tasks: setup-Debian.yml
       when: ansible_os_family == 'Debian'
